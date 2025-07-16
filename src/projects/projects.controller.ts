@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param, Put } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Put, Query } from '@nestjs/common';
 import { ProjectsService } from './projects.service';
 import { CreateProjectsDto } from './dto/create-projects.dto';
 
@@ -22,8 +22,12 @@ export class ProjectsController {
    }
 
    @Get('all-projects')
-   findAll() {
-      const projects = this.projectService.findAll();
+   findAll(
+      @Query('userId') user: string,
+      @Query('page') page = 1,
+      @Query('limit') limit = 10
+   ) {
+      const projects = this.projectService.findAll(user, +page, +limit);
       return projects
    }
 }

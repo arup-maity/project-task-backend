@@ -15,15 +15,16 @@ export class ProjectsService {
       const createdProject = await this.projectsModel.create({
          title: body.title,
          description: body.description,
-         status: body.status
+         status: body.status,
+         user: body.userID
       });
       return createdProject
    }
 
    async updateProject(body: CreateProjectsDto, id: string): Promise<any> {
       return this.projectsModel.findByIdAndUpdate(id, body, {
-         new: true,      // return the updated document
-         runValidators: true, // validate the data
+         new: true,
+         runValidators: true,
       }).exec();
    }
    async readProject(id: string): Promise<any> {
@@ -35,7 +36,12 @@ export class ProjectsService {
    }
 
 
-   async findAll(): Promise<any[]> {
-      return this.projectsModel.find().exec();
+   async findAll(userId: string, page: number, limit: number): Promise<any> {
+      const [projects, count] = await Promise.all([
+         this.projectsModel.find({ user: userId }).skip((page - 1) * limit).limit(limit).exec(),
+         this.projectsModel.countDocuments({ user: userId }).exec()
+      ]);
+
+      return { projects, count };
    }
 }

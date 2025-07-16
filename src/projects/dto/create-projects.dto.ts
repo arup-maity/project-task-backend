@@ -22,4 +22,11 @@ export class CreateProjectsDto {
    })
    @IsString()
    status: string;
+
+   @ApiProperty({
+      description: 'user id',
+      example: '68779e68110e2880dd988e13',
+   })
+   @IsString()
+   userID: string;
 }

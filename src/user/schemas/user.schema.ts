@@ -10,8 +10,6 @@ export const UserSchema = new mongoose.Schema({
    },
    lastname: {
       type: String,
-      required: true,
-      trim: true
    },
    email: {
       type: String,

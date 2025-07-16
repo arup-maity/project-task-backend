@@ -22,4 +22,18 @@ export class CreateTaskDto {
    })
    @IsString()
    status: string;
+
+   @ApiProperty({
+      description: 'User ID',
+      example: '68779e68110e2880dd988e13',
+   })
+   @IsString()
+   user: string;
+
+   @ApiProperty({
+      description: 'Project ID',
+      example: '68779e68110e2880dd988e13',
+   })
+   @IsString()
+   project: string;
 }

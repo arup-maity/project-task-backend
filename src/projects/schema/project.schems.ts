@@ -18,5 +18,6 @@ export const ProjectsSchema = new mongoose.Schema({
       required: true,
       trim: true
    },
-   // user: { type: mongoose.Types.ObjectId, ref: 'Projects' },
+   user: { type: mongoose.Types.ObjectId, ref: 'Projects' },
+   tasks: [{ type: mongoose.Types.ObjectId, ref: 'Tasks' }]
 });
